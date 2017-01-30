@@ -55,8 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Actor.cs" />
     <Compile Include="Core\Colors.cs" />
     <Compile Include="Core\DungeonMap.cs" />
+    <Compile Include="Core\Player.cs" />
+    <Compile Include="Interfaces\IActor.cs" />
+    <Compile Include="Interfaces\IDrawable.cs" />
     <Compile Include="Systems\MapGenerator.cs" />
     <Compile Include="Core\Swatch.cs" />
     <Compile Include="Game.cs" />
