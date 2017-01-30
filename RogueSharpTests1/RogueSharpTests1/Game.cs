@@ -1,4 +1,6 @@
 ﻿using RLNET;
+using RogueSharpTests1.Core;
+using RogueSharpTests1.Systems;
 
 namespace RogueSharpTests1.Core
 {
@@ -29,6 +31,8 @@ namespace RogueSharpTests1.Core
         private static readonly int _inventoryHeight = 11;
         private static RLConsole _inventoryConsole;
 
+        public static DungeonMap DungeonMap { get; private set; }
+
         public static void Main()
         {
             // This must be the exact name of the bitmap font file we are using or it will error.
@@ -45,6 +49,9 @@ namespace RogueSharpTests1.Core
             _messageConsole = new RLConsole(_messageWidth, _messageHeight);
             _statConsole = new RLConsole(_statWidth, _statHeight);
             _inventoryConsole = new RLConsole(_inventoryWidth, _inventoryHeight);
+
+            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight);
+            DungeonMap = mapGenerator.CreateMap();
 
             // Set up a handler for RLNET's Update event
             _rootConsole.Update += OnRootConsoleUpdate;
@@ -76,6 +83,7 @@ namespace RogueSharpTests1.Core
         // Event handler for RLNET's Render event
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
         {
+            DungeonMap.Draw(_mapConsole);
             // Blit the sub consoles to the root console in the correct locations
             RLConsole.Blit(_mapConsole, 0, 0, _mapWidth, _mapHeight, _rootConsole, 0, _inventoryHeight);
             RLConsole.Blit(_statConsole, 0, 0, _statWidth, _statHeight, _rootConsole, _mapWidth, 0);
